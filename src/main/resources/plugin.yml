@@ -1,0 +1,6 @@
+name: AnvilLogin
+main: net.islandearth.anvillogin.AnvilLogin
+author: SamB440
+version: 1.0.3
+api-version: 1.13
+commands:
