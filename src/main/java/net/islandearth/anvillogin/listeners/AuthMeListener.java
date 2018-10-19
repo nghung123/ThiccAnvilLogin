@@ -33,7 +33,7 @@ public class AuthMeListener implements Listener {
 				        plugin.getNotLoggedIn().remove(player.getUniqueId());
 				        player.sendMessage(plugin.getTranslator().getTranslationFor(player, "loggedin"));
 				        AuthMeApi.getInstance().forceLogin(player);
-				        player.setLevel(player.getLevel() + 1);
+				        player.setLevel(player.getLevel());
 				        return null;
 				    }
 				    return "Incorrect.";
