@@ -3,5 +3,6 @@ main: net.islandearth.anvillogin.AnvilLogin
 author: SamB440
 version: @version@
 soft-depend: [AuthMe]
+depend: [Languagy]
 api-version: 1.13
 commands:
