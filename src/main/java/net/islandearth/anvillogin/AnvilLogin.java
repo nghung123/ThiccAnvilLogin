@@ -74,7 +74,6 @@ public class AnvilLogin extends JavaPlugin {
 	
 	private void registerListeners() {
 		PluginManager pm = Bukkit.getPluginManager();
-		log.info("" + authme);
 		if (!authme) pm.registerEvents(new PlayerListener(this), this);
 		else pm.registerEvents(new AuthMeListener(this), this);
 	}

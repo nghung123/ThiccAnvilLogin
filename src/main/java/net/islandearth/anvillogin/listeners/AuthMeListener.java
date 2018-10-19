@@ -22,11 +22,9 @@ public class AuthMeListener implements Listener {
 	@EventHandler
 	public void onJoin(PlayerJoinEvent pje) {
 		Player player = pje.getPlayer();
-		plugin.getLogger().info("a");
 		if (!player.hasPermission("AnvilLogin.bypass") 
 				&& !plugin.getLoggedIn().contains(player.getUniqueId())
-				&& !AuthMeApi.getInstance().isRegistered(player.getName())) {
-			plugin.getLogger().info("b");
+				&& AuthMeApi.getInstance().isRegistered(player.getName())) {
 			Bukkit.getScheduler().runTaskLater(plugin, () -> {
 				plugin.getNotLoggedIn().add(player.getUniqueId());
 				new AnvilGUI(plugin, player, "Enter Password", (oPlayer, reply) -> {
