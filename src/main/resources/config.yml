@@ -6,3 +6,5 @@
 Password: 'admin'
 #Whether the player should be kicked after 30 seconds of not entering the correct password.
 Timeout: true
+#The time, in ticks, until a player is kicked
+Time: 600

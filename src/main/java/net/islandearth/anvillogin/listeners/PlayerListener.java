@@ -5,6 +5,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
@@ -20,13 +21,12 @@ public class PlayerListener implements Listener {
 	@EventHandler
 	public void onJoin(PlayerJoinEvent pje) {
 		Player player = pje.getPlayer();
-		if (plugin.getAuthme() == null) {
-			plugin.getNotLoggedIn().add(player.getUniqueId());
+		if (!plugin.isAuthme()) {
 			
 			if (!player.hasPermission("AnvilLogin.bypass") && !plugin.getLoggedIn().contains(player.getUniqueId())) {
-				
 				Bukkit.getScheduler().runTaskLater(plugin, () -> {
-					new AnvilGUI(plugin, player, "Please enter server password:", (oPlayer, reply) -> {
+					plugin.getNotLoggedIn().add(player.getUniqueId());
+					new AnvilGUI(plugin, player, "Enter Password", (oPlayer, reply) -> {
 						if (reply.equalsIgnoreCase(plugin.getConfig().getString("Password"))) {
 					    	plugin.getLoggedIn().add(player.getUniqueId());
 					        plugin.getNotLoggedIn().remove(player.getUniqueId());
@@ -35,14 +35,14 @@ public class PlayerListener implements Listener {
 					    }
 					    return "Incorrect.";
 					});
-				}, 20L);
+				}, 200L);
 				
 				if (plugin.getConfig().getBoolean("Timeout")) {
 					Bukkit.getScheduler().runTaskLater(plugin, () -> {
 						if (!plugin.getLoggedIn().contains(player.getUniqueId())) {
 		    				player.kickPlayer(plugin.getTranslator().getTranslationFor(player, "kicked"));
 						}
-					}, 600L);
+					}, plugin.getConfig().getLong("Time"));
 				}
 			}
 		}
@@ -59,7 +59,7 @@ public class PlayerListener implements Listener {
 	public void onClose(InventoryCloseEvent ice) {
 		if (ice.getPlayer() instanceof Player) {
 			Player player = (Player) ice.getPlayer();
-			if (plugin.getNotLoggedIn().contains(player.getUniqueId()) && !plugin.getLoggedIn().contains(player.getUniqueId())) {
+			if (ice.getInventory().getType() == InventoryType.ANVIL && plugin.getNotLoggedIn().contains(player.getUniqueId()) && !plugin.getLoggedIn().contains(player.getUniqueId())) {
 				player.kickPlayer(plugin.getTranslator().getTranslationFor(player, "closedinventory"));
 			}
 		}

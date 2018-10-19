@@ -13,7 +13,6 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import fr.xephi.authme.api.v3.AuthMeApi;
 import lombok.Getter;
 import net.islandearth.anvillogin.listeners.AuthMeListener;
 import net.islandearth.anvillogin.listeners.PlayerListener;
@@ -27,14 +26,15 @@ public class AnvilLogin extends JavaPlugin {
     @Getter private List<UUID> loggedIn = new ArrayList<>();
     @Getter private List<UUID> notLoggedIn = new ArrayList<>();
     @Getter private Translator translator;
-    @Getter private AuthMeApi authme;
+    @Getter private boolean authme;
 	
 	public void onEnable() {
+		if (Bukkit.getPluginManager().getPlugin("AuthMe") != null) {
+			log.info("Found authme!");
+			this.authme = true;
+		} else this.authme = false;
 		createFiles();
 		registerListeners();
-		if (Bukkit.getPluginManager().getPlugin("AuthMe") != null) {
-			this.authme = AuthMeApi.getInstance();
-		} else this.authme = null;
 		log.info("[AnvilLogin] Enabled & registered events!");
 	}
 	
@@ -74,7 +74,8 @@ public class AnvilLogin extends JavaPlugin {
 	
 	private void registerListeners() {
 		PluginManager pm = Bukkit.getPluginManager();
-		pm.registerEvents(new PlayerListener(this), this);
-		if (authme != null) pm.registerEvents(new AuthMeListener(this), this);
+		log.info("" + authme);
+		if (!authme) pm.registerEvents(new PlayerListener(this), this);
+		else pm.registerEvents(new AuthMeListener(this), this);
 	}
 }
