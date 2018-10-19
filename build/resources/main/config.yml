@@ -1,0 +1,8 @@
+#AnvilLogin configuration.
+#If there are any bugs/errors, do not leave a review. Report them using gitlab or discord.
+#See lang for languages.
+
+#The password people will use to login to your server.
+Password: 'admin'
+#Whether the player should be kicked after 30 seconds of not entering the correct password.
+Timeout: true

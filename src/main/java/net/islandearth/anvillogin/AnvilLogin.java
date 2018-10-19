@@ -10,7 +10,6 @@ import java.util.logging.Logger;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -21,7 +20,7 @@ import net.islandearth.anvillogin.listeners.PlayerListener;
 import net.islandearth.languagy.language.Language;
 import net.islandearth.languagy.language.Translator;
 
-public class AnvilLogin extends JavaPlugin implements Listener {
+public class AnvilLogin extends JavaPlugin {
     
 	private Logger log = Bukkit.getLogger();
 	
@@ -45,6 +44,8 @@ public class AnvilLogin extends JavaPlugin implements Listener {
     
 	private void createFiles() {
 		saveDefaultConfig();
+		File lang = new File(getDataFolder() + "/lang/");
+		if (!lang.exists()) lang.mkdirs();
 		File fallback = new File(getDataFolder() + "/lang/" + "en_gb.yml");
 		for (Language language : Language.values()) {
 			File file = new File(getDataFolder() + "/lang/" + language.getCode() + ".yml");
