@@ -8,6 +8,7 @@ import java.util.UUID;
 import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.PluginManager;
@@ -70,6 +71,7 @@ public class AnvilLogin extends JavaPlugin {
 		}
 		
 		this.translator = new Translator(this, fallback);
+		translator.setDisplay(Material.ANVIL);
 	}
 	
 	private void registerListeners() {

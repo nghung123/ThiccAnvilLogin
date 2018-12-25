@@ -1,7 +1,7 @@
 name: AnvilLogin
 main: net.islandearth.anvillogin.AnvilLogin
 author: SamB440
-version: @version@
+version: 1.0.5
 soft-depend: [AuthMe]
 depend: [Languagy]
 api-version: 1.13
