@@ -19,6 +19,7 @@ import net.islandearth.anvillogin.listeners.AuthMeListener;
 import net.islandearth.anvillogin.listeners.PlayerListener;
 import net.islandearth.languagy.language.Language;
 import net.islandearth.languagy.language.Translator;
+import net.wesjd.anvilgui.version.VersionMatcher;
 
 public class AnvilLogin extends JavaPlugin {
     
@@ -30,6 +31,14 @@ public class AnvilLogin extends JavaPlugin {
     @Getter private boolean authme;
 	
 	public void onEnable() {
+		try {
+			new VersionMatcher().match();
+		} catch (RuntimeException e) {
+			log.severe("Your server version is not supported! Please update to the latest version!");
+			Bukkit.getPluginManager().disablePlugin(this);
+			return;
+		}
+		
 		if (Bukkit.getPluginManager().getPlugin("AuthMe") != null) {
 			log.info("Found authme!");
 			this.authme = true;
