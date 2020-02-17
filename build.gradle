@@ -16,10 +16,6 @@ repositories {
     maven { url "https://erethon.de/repo/" }
     maven { url = 'https://jitpack.io' }
     maven {
-        name = 'samb440'
-        url = 'https://samb440.gitlab.io/plugins/maven/'
-    }
-    maven {
         name = 'codemc-repo'
         url = 'https://repo.codemc.org/repository/maven-snapshots/'
     }
@@ -38,9 +34,7 @@ dependencies {
     compileOnly 'org.bukkit:craftbukkit:1.13.2-R0.1-SNAPSHOT'
     compileOnly 'com.gitlab.SamB440:languagy:master-SNAPSHOT'
     implementation 'com.github.WesJD:AnvilGUI:master-SNAPSHOT'
-    compileOnly 'org.projectlombok:lombok:1.18.10'
-    annotationProcessor 'org.projectlombok:lombok:1.18.10'
-    compileOnly 'fr.xephi:authme:5.5.0-SNAPSHOT'
+    compileOnly 'fr.xephi:authme:5.6.0-SNAPSHOT'
 }
 
 shadowJar {
