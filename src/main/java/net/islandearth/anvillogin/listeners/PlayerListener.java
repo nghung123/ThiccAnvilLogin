@@ -26,14 +26,18 @@ public class PlayerListener implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent pje) {
         Player myPlayer = pje.getPlayer();
-        boolean pass = !plugin.isAuthme() || AuthMeApi.getInstance().isRegistered(myPlayer.getName());
         if (!myPlayer.hasPermission("AnvilLogin.bypass")
-                && !plugin.getLoggedIn().contains(myPlayer.getUniqueId())
-                && pass) {
+                && !plugin.getLoggedIn().contains(myPlayer.getUniqueId())) {
             Bukkit.getScheduler().runTaskLater(plugin, () -> {
                 plugin.getNotLoggedIn().add(myPlayer.getUniqueId());
                 new AnvilGUI.Builder()
                         .onComplete((player, text) -> {
+                            if (plugin.isAuthme() && plugin.getConfig().getBoolean("register") && !AuthMeApi.getInstance().isRegistered(player.getName())) {
+                                AuthMeApi.getInstance().forceRegister(player, text, true);
+                                Translations.LOGGED_IN.send(player);
+                                return AnvilGUI.Response.close();
+                            }
+
                             if (text.equalsIgnoreCase(plugin.getConfig().getString("Password"))
                                     || (plugin.isAuthme() && AuthMeApi.getInstance().checkPassword(player.getName(), text))) {
                                 plugin.getLoggedIn().add(player.getUniqueId());
