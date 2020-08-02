@@ -3,10 +3,10 @@ package net.islandearth.anvillogin;
 import net.islandearth.anvillogin.api.AnvilLoginAPI;
 import net.islandearth.anvillogin.listeners.PlayerListener;
 import net.islandearth.anvillogin.translation.Translations;
-import net.islandearth.languagy.language.Language;
-import net.islandearth.languagy.language.LanguagyImplementation;
-import net.islandearth.languagy.language.LanguagyPluginHook;
-import net.islandearth.languagy.language.Translator;
+import net.islandearth.languagy.api.language.Language;
+import net.islandearth.languagy.api.language.LanguagyImplementation;
+import net.islandearth.languagy.api.language.LanguagyPluginHook;
+import net.islandearth.languagy.api.language.Translator;
 import net.wesjd.anvilgui.version.VersionMatcher;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -64,6 +64,7 @@ public class AnvilLogin extends JavaPlugin implements AnvilLoginAPI, LanguagyPlu
         plugin = this;
         createFiles();
         registerListeners();
+        this.hook(this);
         this.getLogger().info("[AnvilLogin] Enabled & registered events!");
     }
     

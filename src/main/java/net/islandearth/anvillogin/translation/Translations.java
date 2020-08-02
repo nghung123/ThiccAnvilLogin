@@ -1,7 +1,7 @@
 package net.islandearth.anvillogin.translation;
 
 import net.islandearth.anvillogin.AnvilLogin;
-import net.islandearth.languagy.language.Language;
+import net.islandearth.languagy.api.language.Language;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;

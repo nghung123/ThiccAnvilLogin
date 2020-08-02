@@ -1,6 +1,6 @@
 package net.islandearth.anvillogin.api;
 
-import net.islandearth.languagy.language.Translator;
+import net.islandearth.languagy.api.language.Translator;
 
 public interface AnvilLoginAPI {
 	/**
