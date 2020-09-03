@@ -10,3 +10,5 @@ Timeout: true
 Time: 600
 # Whether to enable registering via the anvil (AuthMe only)
 register: false
+# Whether to print debugs
+debug: true

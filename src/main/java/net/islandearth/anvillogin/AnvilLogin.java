@@ -79,6 +79,11 @@ public class AnvilLogin extends JavaPlugin implements AnvilLoginAPI, LanguagyPlu
     }
 
     @Override
+    public boolean debug() {
+        return this.getConfig().getBoolean("debug");
+    }
+
+    @Override
     public void onLanguagyHook() {
         translator.setDisplay(Material.ANVIL);
     }
