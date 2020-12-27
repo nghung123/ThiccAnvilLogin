@@ -52,7 +52,7 @@ public class PlayerListener implements Listener {
                         })
                         .preventClose()
                         .text(Translations.GUI_TEXT.get(myPlayer))
-                        .item(new ItemStack(Material.ANVIL))
+                        .itemLeft(new ItemStack(Material.ANVIL))
                         .title(Translations.GUI_TITLE.get(myPlayer))  //only works in 1.14+
                         .plugin(plugin)
                         .open(myPlayer);
