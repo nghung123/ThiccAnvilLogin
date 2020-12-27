@@ -1,5 +1,7 @@
 package net.islandearth.anvillogin.listeners;
 
+import com.github.games647.fastlogin.bukkit.FastLoginBukkit;
+import com.github.games647.fastlogin.core.PremiumStatus;
 import fr.xephi.authme.api.v3.AuthMeApi;
 import net.islandearth.anvillogin.AnvilLogin;
 import net.islandearth.anvillogin.translation.Translations;
@@ -29,11 +31,28 @@ public class PlayerListener implements Listener {
         if (!myPlayer.hasPermission("AnvilLogin.bypass")
                 && !plugin.getLoggedIn().contains(myPlayer.getUniqueId())) {
             Bukkit.getScheduler().runTaskLater(plugin, () -> {
+                if (plugin.getConfig().getBoolean("fastlogin")) {
+                    if (Bukkit.getPluginManager().getPlugin("FastLogin") != null) {
+                        FastLoginBukkit fastLogin = (FastLoginBukkit) Bukkit.getPluginManager().getPlugin("FastLogin");
+                        if (fastLogin != null) {
+                            PremiumStatus premiumStatus = fastLogin.getStatus(myPlayer.getUniqueId());
+                            if (premiumStatus == PremiumStatus.PREMIUM) {
+                                if (plugin.getConfig().getBoolean("debug")) {
+                                    plugin.getLogger().info("Skipping player " + myPlayer.getName() + " because they are premium.");
+                                }
+                                return;
+                            }
+                        }
+                    }
+                }
+
                 plugin.getNotLoggedIn().add(myPlayer.getUniqueId());
                 new AnvilGUI.Builder()
                         .onComplete((player, text) -> {
                             if (plugin.isAuthme() && plugin.getConfig().getBoolean("register") && !AuthMeApi.getInstance().isRegistered(player.getName())) {
                                 AuthMeApi.getInstance().forceRegister(player, text, true);
+                                plugin.getLoggedIn().add(player.getUniqueId());
+                                plugin.getNotLoggedIn().remove(player.getUniqueId());
                                 Translations.LOGGED_IN.send(player);
                                 return AnvilGUI.Response.close();
                             }
@@ -56,15 +75,16 @@ public class PlayerListener implements Listener {
                         .title(Translations.GUI_TITLE.get(myPlayer))  //only works in 1.14+
                         .plugin(plugin)
                         .open(myPlayer);
-            }, 40L);
 
-            if (plugin.getConfig().getBoolean("Timeout")) {
-                Bukkit.getScheduler().runTaskLater(plugin, () -> {
-                    if (!plugin.getLoggedIn().contains(myPlayer.getUniqueId())) {
-                        myPlayer.kickPlayer(Translations.KICKED.get(myPlayer));
-                    }
-                }, plugin.getConfig().getLong("Time"));
-            }
+
+                if (plugin.getConfig().getBoolean("Timeout")) {
+                    Bukkit.getScheduler().runTaskLater(plugin, () -> {
+                        if (!plugin.getLoggedIn().contains(myPlayer.getUniqueId())) {
+                            myPlayer.kickPlayer(Translations.KICKED.get(myPlayer));
+                        }
+                    }, plugin.getConfig().getLong("Time"));
+                }
+            }, 40L);
         }
     }
 

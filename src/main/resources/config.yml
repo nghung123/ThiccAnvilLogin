@@ -12,3 +12,5 @@ Time: 600
 register: false
 # Whether to print debugs
 debug: false
+# Whether to skip premium players (FastLogin only)
+fastlogin: false
