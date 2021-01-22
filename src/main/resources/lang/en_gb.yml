@@ -1,6 +1,5 @@
 kicked: "&7[&9AnvilLogin&7] &cYou have been kicked for not entering the password within 30 seconds."
 logged_in: "&7[&9AnvilLogin&7] &aYou logged in to the server!"
-closed_inventory: "&7[&9AnvilLogin&7] &cYou need to enter a password!"
 gui_title: "Enter Password"
 gui_text: "Enter Password"
 gui_wrong: "Incorrect."

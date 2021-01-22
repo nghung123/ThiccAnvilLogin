@@ -9,8 +9,6 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.inventory.InventoryCloseEvent;
-import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
@@ -52,7 +50,7 @@ public class PlayerListener implements Listener {
                         })
                         .preventClose()
                         .text(Translations.GUI_TEXT.get(myPlayer))
-                        .item(new ItemStack(Material.ANVIL))
+                        .itemLeft(new ItemStack(Material.ANVIL))
                         .title(Translations.GUI_TITLE.get(myPlayer))  //only works in 1.14+
                         .plugin(plugin)
                         .open(myPlayer);
@@ -73,17 +71,5 @@ public class PlayerListener implements Listener {
         Player player = pqe.getPlayer();
         plugin.getLoggedIn().remove(player.getUniqueId());
         plugin.getNotLoggedIn().remove(player.getUniqueId());
-    }
-
-    @EventHandler
-    public void onClose(InventoryCloseEvent ice) {
-        if (ice.getPlayer() instanceof Player) {
-            Player player = (Player) ice.getPlayer();
-            if (ice.getInventory().getType() == InventoryType.ANVIL
-                    && plugin.getNotLoggedIn().contains(player.getUniqueId())
-                    && !plugin.getLoggedIn().contains(player.getUniqueId())) {
-                player.kickPlayer(Translations.CLOSED_INVENTORY.get(player));
-            }
-        }
     }
 }

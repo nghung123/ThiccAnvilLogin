@@ -39,10 +39,10 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
-    compileOnly 'org.spigotmc:spigot-api:1.16.1-R0.1-SNAPSHOT'
+    compileOnly 'org.spigotmc:spigot-api:1.13.2-R0.1-SNAPSHOT'
     compileOnly 'fr.xephi:authme:5.6.0-SNAPSHOT'
 
-    implementation 'net.islandearth:languagy-api:2.0.2-SNAPSHOT'
+    implementation 'com.gitlab.samb440.languagy:api:3ba744c0f1' // languagy
     implementation 'com.github.WesJD:AnvilGUI:master-SNAPSHOT'
 }
 
