@@ -35,7 +35,7 @@ public class PlayerListener implements Listener {
                         if (fastLogin != null) {
                             PremiumStatus premiumStatus = fastLogin.getStatus(myPlayer.getUniqueId());
                             if (premiumStatus == PremiumStatus.PREMIUM) {
-                                if (plugin.getConfig().getBoolean("debug")) {
+                                if (plugin.debug()) {
                                     plugin.getLogger().info("Skipping player " + myPlayer.getName() + " because they are premium.");
                                 }
                                 return;
@@ -51,7 +51,9 @@ public class PlayerListener implements Listener {
                                 AuthMeApi.getInstance().forceRegister(player, text, true);
                                 plugin.getLoggedIn().add(player.getUniqueId());
                                 plugin.getNotLoggedIn().remove(player.getUniqueId());
-                                Translations.LOGGED_IN.send(player);
+                                if (plugin.getConfig().getBoolean("login_messages")) {
+                                    Translations.LOGGED_IN.send(player);
+                                }
                                 return AnvilGUI.Response.close();
                             }
 
@@ -59,7 +61,9 @@ public class PlayerListener implements Listener {
                                     || (plugin.isAuthme() && AuthMeApi.getInstance().checkPassword(player.getName(), text))) {
                                 plugin.getLoggedIn().add(player.getUniqueId());
                                 plugin.getNotLoggedIn().remove(player.getUniqueId());
-                                Translations.LOGGED_IN.send(player);
+                                if (plugin.getConfig().getBoolean("login_messages")) {
+                                    Translations.LOGGED_IN.send(player);
+                                }
                                 if (plugin.isAuthme()) AuthMeApi.getInstance().forceLogin(player);
                                 player.setLevel(player.getLevel());
                                 return AnvilGUI.Response.close();
