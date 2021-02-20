@@ -28,6 +28,11 @@ public class PlayerListener implements Listener {
         Player myPlayer = pje.getPlayer();
         if (!myPlayer.hasPermission("AnvilLogin.bypass")
                 && !plugin.getLoggedIn().contains(myPlayer.getUniqueId())) {
+            if (plugin.isAuthme()
+                    && (AuthMeApi.getInstance().isAuthenticated(myPlayer) || AuthMeApi.getInstance().isUnrestricted(myPlayer))) {
+                return;
+            }
+
             Bukkit.getScheduler().runTaskLater(plugin, () -> {
                 if (plugin.getConfig().getBoolean("fastlogin")) {
                     if (Bukkit.getPluginManager().getPlugin("FastLogin") != null) {
