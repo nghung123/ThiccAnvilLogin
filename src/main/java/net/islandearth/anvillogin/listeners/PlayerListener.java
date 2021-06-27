@@ -11,6 +11,7 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
@@ -107,6 +108,15 @@ public class PlayerListener implements Listener {
         Player player = (Player) event.getView().getPlayer();
         if (plugin.getNotLoggedIn().contains(player.getUniqueId())) {
             event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onDamage(EntityDamageByEntityEvent event) {
+        if (event.getEntity() instanceof Player player) {
+            if (!plugin.getNotLoggedIn().contains(player.getUniqueId())) {
+                event.setCancelled(true);
+            }
         }
     }
 
