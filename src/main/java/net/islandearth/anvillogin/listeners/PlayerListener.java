@@ -114,7 +114,7 @@ public class PlayerListener implements Listener {
     @EventHandler
     public void onDamage(EntityDamageByEntityEvent event) {
         if (event.getEntity() instanceof Player player) {
-            if (!plugin.getNotLoggedIn().contains(player.getUniqueId())) {
+            if (plugin.getNotLoggedIn().contains(player.getUniqueId())) {
                 event.setCancelled(true);
             }
         }
