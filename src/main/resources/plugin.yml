@@ -1,6 +1,6 @@
 name: AnvilLogin
 main: net.islandearth.anvillogin.AnvilLogin
-author: SamB440
+author: QuanTrieuPCYT
 version: "${version}"
-softdepend: [Languagy, AuthMe, FastLogin]
+softdepend: [Languagy, AuthMe, FastLogin, floodgate]
 api-version: 1.13

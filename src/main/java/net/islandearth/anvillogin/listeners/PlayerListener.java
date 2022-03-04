@@ -17,6 +17,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
+import org.geysermc.floodgate.api.FloodgateApi;
 
 public class PlayerListener implements Listener {
 
@@ -48,6 +49,13 @@ public class PlayerListener implements Listener {
                             return;
                         }
                     }
+                }
+            }
+
+            if (plugin.getConfig().getBoolean("floodgate-hook")) {
+                FloodgateApi api = FloodgateApi.getInstance();
+                if (api.isFloodgatePlayer(myPlayer.getUniqueId())) {
+                    return;
                 }
             }
 

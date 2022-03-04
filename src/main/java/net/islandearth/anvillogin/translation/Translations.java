@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public enum Translations {
-	KICKED("&7[&9AnvilLogin&7] &cYou have been kicked for not entering the password within 30 seconds."),
-	LOGGED_IN("&7[&9AnvilLogin&7] &aYou logged in to the server!"),
+	KICKED("&7[&9ThiccLogin&7] &cYou have been kicked for not entering the password within 60 seconds."),
+	LOGGED_IN("&7[&9ThiccLogin&7] &aYou logged in to the server!"),
 	GUI_TITLE("Enter Password"),
 	GUI_TEXT("Enter Password"),
 	GUI_WRONG("Incorrect.");

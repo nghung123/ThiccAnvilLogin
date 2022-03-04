@@ -3,16 +3,18 @@
 # See lang for languages.
 
 # The password people will use to login to your server. Will not be used if you are using AuthMe.
-Password: 'admin'
+Password: 'qtpctechhxd'
 # Whether the player should be kicked after 30 seconds of not entering the correct password.
 Timeout: true
 # The time, in ticks, until a player is kicked
-Time: 600
+Time: 1200
 # Whether to enable registering via the anvil (AuthMe only)
-register: false
+register: true
 # Whether to print debugs
 debug: false
 # Whether to skip premium players (FastLogin only)
-fastlogin: false
+fastlogin: true
+# Whether to skip Anvil UI for Bedrock player (Floodgate only)
+floodgate-hook: true
 # Whether to display login messages or not
 login_messages: true

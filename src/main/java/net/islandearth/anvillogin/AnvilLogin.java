@@ -51,7 +51,7 @@ public class AnvilLogin extends JavaPlugin implements AnvilLoginAPI, LanguagyPlu
         try {
             new VersionMatcher().match();
         } catch (RuntimeException e) {
-            this.getLogger().severe("Your server version is not supported! Please update to the latest version!");
+            this.getLogger().severe("Oops, your server version is not supported! Please update to the latest version!");
             Bukkit.getPluginManager().disablePlugin(this);
             return;
         }
@@ -65,7 +65,7 @@ public class AnvilLogin extends JavaPlugin implements AnvilLoginAPI, LanguagyPlu
         createFiles();
         registerListeners();
         this.hook(this);
-        this.getLogger().info("[AnvilLogin] Enabled & registered events!");
+        this.getLogger().info("[ThiccAnvilLogin] Enabled & registered events!");
     }
     
     private void createFiles() {

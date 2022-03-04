@@ -1,3 +1,4 @@
-# AnvilLogin
-Allows you to login to your Minecraft server using an AnvilGUI.
-https://www.spigotmc.org/resources/anvillogin.31861/
+# ThiccAnvilLogin
+A fork of AnvilLogin, with extended support for Floodgate (currently offers skip function for AccountUI).
+
+Made by QuanTrieuPCYT, for the famous Thicc SMP.

@@ -12,13 +12,14 @@ repositories {
     maven("https://erethon.de/repo/")
     maven("https://repo.convallyria.com/snapshots")
     maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
+    maven("https://repo.opencollab.dev/maven-snapshots/")
 
     maven {
         name = "codemc-snapshots"
         url = uri("https://repo.codemc.io/repository/maven-snapshots/")
     }
 
-    flatDir { dirs("libraries") } // FastLogin
+     flatDir { dirs("libraries") } // FastLogin
 }
 
 dependencies {
@@ -26,6 +27,7 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-engine:5.8.2")
 
     compileOnly("org.spigotmc:spigot-api:1.18.1-R0.1-SNAPSHOT")
+    compileOnly("org.geysermc.floodgate:api:2.0-SNAPSHOT")
     compileOnly("fr.xephi:authme:5.6.0-SNAPSHOT")
     compileOnly(":FastLoginBukkit")
 
